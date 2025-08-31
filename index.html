@@ -40,12 +40,13 @@
     .menu{display:flex; gap:1rem}
     .ghost{border:1px solid rgba(148,163,184,.25); padding:.45rem .75rem; border-radius:10px}
     .ghost:focus-visible{outline:2px solid var(--ring); outline-offset:2px}
-    .hero{display:grid; grid-template-columns: 1.2fr .8fr; gap:2rem; align-items:center; padding:4rem 0 2rem}
+    .hero{display:grid; grid-template-columns: 1fr; gap:2rem; align-items:center; padding:4rem 0 2rem}
     .badge{display:inline-flex; gap:.45rem; align-items:center; background:rgba(56,189,248,.12); border:1px solid rgba(56,189,248,.28); color:#e0f2fe; border-radius:999px; padding:.35rem .7rem; font-size:.85rem}
     h1{font-size: clamp(2.2rem, 4vw, 3.2rem); line-height:1.1; margin:.75rem 0 1rem}
     .subtitle{color:var(--muted); font-size:1.05rem}
     .cta{display:flex; gap:.75rem; margin-top:1.4rem}
     .btn{display:inline-flex; align-items:center; gap:.5rem; padding:.7rem 1rem; border-radius:12px; border:1px solid rgba(148,163,184,.2)}
+    .btn:focus-visible{outline:2px solid var(--ring); outline-offset:2px}
     .btn.primary{background:linear-gradient(135deg,var(--brand),var(--accent)); color:#001018; font-weight:700; border-color:transparent}
     .btn:hover{transform:translateY(-1px)}
     .panel{background:linear-gradient(180deg, rgba(15,23,42,.9), rgba(15,23,42,.6)); border:1px solid rgba(148,163,184,.16); border-radius:16px; box-shadow: 0 20px 50px -30px rgba(2,8,23,.7)}
@@ -137,7 +138,7 @@
       <div class="cards">
         <article class="panel card" aria-labelledby="p1-title">
           <div class="muted">Vision</div>
-          <h3 id="p2-title">MultiTaskNet (YOLO‑style)</h3>
+          <h3 id="p1-title">MultiTaskNet (YOLO‑style)</h3>
           <p>Anchor‑free detector + classifier for totes vs boxes. Live webcam pipeline with overlays.</p>
           <div class="stack">
             <span class="chip">PyTorch</span><span class="chip">OpenCV</span><span class="chip">TensorBoard</span>
@@ -158,7 +159,7 @@
           <div class="muted" style="margin-bottom:.5rem">Recent timeline</div>
           <div class="timeline">
             <div class="item"><span class="dot"></span><div><strong>Summer ’25</strong> — Automation intern at TVH Parts Co.; pitched an ROI‑driven CV solution.</div></div>
-            <div class="item"><span class="dot"></span><div><strong>Summer ’25</strong> — Built an end to end live inference pipeline; from datta collection to deployment.</div></div>
+            <div class="item"><span class="dot"></span><div><strong>Summer ’25</strong> — Built an end-to-end live inference pipeline; from data collection to deployment.</div></div>
             <div class="item"><span class="dot"></span><div><strong>Now</strong> — Focusing on frontend craft and personal agents.</div></div>
           </div>
         </div>
