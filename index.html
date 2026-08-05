@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tate Meyer • Engineer & Builder</title>
-  <meta name="description" content="Portfolio of Tate Meyer — projects in computer vision, automation, and frontend development." />
-  <meta property="og:title" content="Tate Meyer • Engineer & Builder" />
-  <meta property="og:description" content="Projects in computer vision, automation, and frontend — built from scratch on GitHub Pages." />
+  <title>Tate Meyer • AI Systems & Dev Tooling</title>
+  <meta name="description" content="Tate Meyer — building developer tooling and AI systems. Currently: TTUI (a terminal UI framework) and Model-Experiments (AI-native engineering workflows)." />
+  <meta property="og:title" content="Tate Meyer • AI Systems & Dev Tooling" />
+  <meta property="og:description" content="Developer tooling and AI systems, built from first principles. See TTUI and Model-Experiments." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0ea5e9" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg: #0b1120; /* slate-950 */
@@ -21,6 +21,8 @@
       --brand: #38bdf8; /* sky-400 */
       --accent: #22d3ee; /* cyan-400 */
       --ring: rgba(56,189,248,.35);
+      --term-bg: #05070d;
+      --term-border: rgba(148,163,184,.18);
     }
     html,body{height:100%}
     body{
@@ -29,18 +31,20 @@
       radial-gradient(900px 400px at 10% -10%, rgba(56,189,248,.15), transparent), var(--bg);
     }
     a{color:inherit; text-decoration:none}
+    code, .mono{font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace}
     .container{max-width:1100px; margin:0 auto; padding:0 1rem}
     header{position:sticky; top:0; backdrop-filter: blur(12px); background: linear-gradient(180deg, rgba(2,6,23,.7), rgba(2,6,23,0)); border-bottom: 1px solid rgba(148,163,184,.12); z-index:50}
     .nav{display:flex; align-items:center; justify-content:space-between; padding: .9rem 0}
-    .brand{display:flex; align-items:center; gap:.6rem; font-weight:700; letter-spacing:.2px}
+    .brand{display:flex; align-items:center; gap:.6rem; font-weight:600; letter-spacing:.2px}
+    .brand .mono{color:var(--brand)}
     .logo{width:28px; height:28px; display:grid; place-items:center; border-radius:10px; background:linear-gradient(135deg, var(--brand), var(--accent)); box-shadow:0 8px 24px -8px var(--ring)}
     .logo svg{filter:drop-shadow(0 4px 10px rgba(56,189,248,.35))}
     .nav a{opacity:.85}
     .nav a:hover{opacity:1}
-    .menu{display:flex; gap:1rem}
+    .menu{display:flex; gap:1rem; align-items:center}
     .ghost{border:1px solid rgba(148,163,184,.25); padding:.45rem .75rem; border-radius:10px}
     .ghost:focus-visible{outline:2px solid var(--ring); outline-offset:2px}
-    .hero{display:grid; grid-template-columns: 1fr; gap:2rem; align-items:center; padding:4rem 0 2rem}
+    .hero{display:grid; grid-template-columns: 1.1fr 1fr; gap:2.5rem; align-items:center; padding:4rem 0 2rem}
     .badge{display:inline-flex; gap:.45rem; align-items:center; background:rgba(56,189,248,.12); border:1px solid rgba(56,189,248,.28); color:#e0f2fe; border-radius:999px; padding:.35rem .7rem; font-size:.85rem}
     h1{font-size: clamp(2.2rem, 4vw, 3.2rem); line-height:1.1; margin:.75rem 0 1rem}
     .subtitle{color:var(--muted); font-size:1.05rem}
@@ -50,24 +54,41 @@
     .btn.primary{background:linear-gradient(135deg,var(--brand),var(--accent)); color:#001018; font-weight:700; border-color:transparent}
     .btn:hover{transform:translateY(-1px)}
     .panel{background:linear-gradient(180deg, rgba(15,23,42,.9), rgba(15,23,42,.6)); border:1px solid rgba(148,163,184,.16); border-radius:16px; box-shadow: 0 20px 50px -30px rgba(2,8,23,.7)}
-    .hero .preview{aspect-ratio: 4/3; overflow:hidden; position:relative}
+
+    /* Terminal hero panel */
+    .terminal{background:var(--term-bg); border:1px solid var(--term-border); border-radius:14px; overflow:hidden; box-shadow: 0 30px 60px -30px rgba(2,8,23,.8)}
+    .terminal-bar{display:flex; align-items:center; gap:.5rem; padding:.6rem .8rem; background:rgba(148,163,184,.06); border-bottom:1px solid var(--term-border)}
+    .dot{width:10px; height:10px; border-radius:50%}
+    .dot.red{background:#f87171} .dot.yellow{background:#fbbf24} .dot.green{background:#34d399}
+    .terminal-title{margin-left:.4rem; color:var(--muted); font-size:.8rem}
+    .terminal-body{padding:1.1rem 1.2rem 1.4rem; font-size:.9rem; line-height:1.7}
+    .terminal-body .line{white-space:pre-wrap}
+    .prompt{color:var(--accent)}
+    .out{color:var(--muted)}
+    .cursor{display:inline-block; width:.55em; height:1em; background:var(--accent); vertical-align:-2px; animation: blink 1s step-end infinite}
+    @keyframes blink{50%{opacity:0}}
+
     .grid{display:grid; gap:1rem}
     .projects{padding:2rem 0 3rem}
     .section-title{display:flex; align-items:center; gap:.6rem; color:#e0f2fe; margin:1rem 0}
     .cards{display:grid; grid-template-columns: repeat(12, 1fr); gap:1rem}
-    .card{grid-column: span 4; min-height:220px; padding:1rem; transition:transform .15s ease, border-color .2s ease}
+    .card{grid-column: span 6; min-height:220px; padding:1.2rem; transition:transform .15s ease, border-color .2s ease}
     .card:hover{transform: translateY(-2px); border-color: rgba(56,189,248,.35)}
-    .card h3{margin:.4rem 0; font-size:1.1rem}
+    .card .repo-name{display:block; color:var(--muted); font-size:.8rem; margin-bottom:.3rem}
+    .card h3{margin:.2rem 0 .5rem; font-size:1.15rem}
     .card p{color:var(--muted); font-size:.95rem}
+    .card .status{display:inline-block; margin-top:.7rem; font-size:.75rem; color:#e0f2fe; background:rgba(56,189,248,.1); border:1px solid rgba(56,189,248,.25); border-radius:999px; padding:.2rem .55rem}
     .kpis{display:grid; grid-template-columns: repeat(3,1fr); gap:1rem}
     .kpi{padding:1rem}
+    .kpi .mono{font-size:.78rem; letter-spacing:.02em}
     .muted{color:var(--muted)}
-    .stack{display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.6rem}
-    .chip{font-size:.8rem; border:1px solid rgba(148,163,184,.25); padding:.25rem .5rem; border-radius:999px; color:#cbd5e1}
+    .stack{display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.7rem}
+    .chip{font-size:.78rem; border:1px solid rgba(148,163,184,.25); padding:.25rem .55rem; border-radius:999px; color:#cbd5e1}
     .about{padding:2rem 0}
     .timeline{display:grid; gap:1rem}
     .item{display:flex; gap:1rem; align-items:flex-start}
-    .dot{width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg,var(--brand),var(--accent)); margin-top:.45rem}
+    .item .when{color:var(--accent)}
+    .dot-tl{width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg,var(--brand),var(--accent)); margin-top:.45rem; flex-shrink:0}
     footer{border-top:1px solid rgba(148,163,184,.12); padding:2rem 0; color:var(--muted); font-size:.95rem}
     .footer-grid{display:grid; grid-template-columns: 1fr auto; align-items:center}
 
@@ -89,7 +110,7 @@
             <path d="M12 3l8 5v8l-8 5-8-5V8l8-5z" stroke="#001018" stroke-width="0" fill="white" />
           </svg>
         </span>
-        <span>Tate Meyer</span>
+        <span class="mono">tate@meyer</span>
       </a>
       <nav class="menu" aria-label="Primary">
         <a class="ghost" href="#projects">Projects</a>
@@ -104,11 +125,27 @@
     <!-- Hero -->
     <section class="hero">
       <div>
-        <h1>Hi, I’m Tate, a computer engineering student at KU.</h1>
-        <p class="subtitle">Currently exploring real‑time vision, warehouse automation, and frontend/UI design. This site is a GitHub Pages project to practice modern frontend dev.</p>
+        <span class="badge">AI Systems &amp; Dev Tooling</span>
+        <h1>Hi, I’m Tate — I build developer tooling and AI systems.</h1>
+        <p class="subtitle">Computer engineering student at KU. Right now I'm building a terminal UI framework from first principles and experimenting with GitHub itself as the harness between a human and an AI coding agent.</p>
         <div class="cta">
           <a class="btn primary" href="#projects">See projects</a>
           <a class="btn" href="#contact">Get in touch</a>
+        </div>
+      </div>
+      <div class="terminal" role="img" aria-label="Terminal showing a whoami command and its output">
+        <div class="terminal-bar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span class="terminal-title mono">tate@meyer:~</span>
+        </div>
+        <div class="terminal-body mono">
+          <div class="line"><span class="prompt">$</span> whoami</div>
+          <div class="line out">tate meyer — building dev tools &amp; AI systems</div>
+          <div class="line">&nbsp;</div>
+          <div class="line"><span class="prompt">$</span> ls ~/currently-building</div>
+          <div class="line out">ttui/               model-experiments/</div>
+          <div class="line">&nbsp;</div>
+          <div class="line"><span class="prompt">$</span> <span class="cursor"></span></div>
         </div>
       </div>
     </section>
@@ -116,16 +153,16 @@
     <!-- KPIs / Quick facts -->
     <section aria-labelledby="facts-heading" class="kpis">
       <div class="panel kpi">
-        <div class="muted">Primary Focus</div>
-        <div>Frontend + AI Systems</div>
+        <div class="muted mono">primary_focus</div>
+        <div>AI Systems &amp; Dev Tooling</div>
       </div>
       <div class="panel kpi">
-        <div class="muted">Based In</div>
+        <div class="muted mono">based_in</div>
         <div>Lawrence, KS</div>
       </div>
       <div class="panel kpi">
-        <div class="muted">Currently</div>
-        <div>Building personal web tools</div>
+        <div class="muted mono">currently</div>
+        <div>Building TTUI &amp; Model-Experiments</div>
       </div>
     </section>
 
@@ -137,11 +174,21 @@
       </div>
       <div class="cards">
         <article class="panel card" aria-labelledby="p1-title">
-          <div class="muted">Vision</div>
-          <h3 id="p1-title">MultiTaskNet (YOLO‑style)</h3>
-          <p>Anchor‑free detector + classifier for totes vs boxes. Live webcam pipeline with overlays.</p>
+          <span class="repo-name mono">github.com/tatemeyer/ttui</span>
+          <h3 id="p1-title"><a href="https://github.com/tatemeyer/ttui">TTUI</a></h3>
+          <p>A terminal UI framework built from first principles: direct control over text rendering, color, pane layout, and multiplexing.</p>
+          <span class="status">In design — spec &amp; plan complete</span>
           <div class="stack">
-            <span class="chip">PyTorch</span><span class="chip">OpenCV</span><span class="chip">TensorBoard</span>
+            <span class="chip mono">Rust</span><span class="chip mono">Spec-driven design</span>
+          </div>
+        </article>
+        <article class="panel card" aria-labelledby="p2-title">
+          <span class="repo-name mono">github.com/tatemeyer/Model-Experiments</span>
+          <h3 id="p2-title"><a href="https://github.com/tatemeyer/Model-Experiments">Model-Experiments</a></h3>
+          <p>Using GitHub itself — Issues, Projects, Actions — as the harness between a human and Claude Code: specify intent and how to verify it, let the agent decide the implementation.</p>
+          <span class="status">Active</span>
+          <div class="stack">
+            <span class="chip mono">Python</span><span class="chip mono">uv</span><span class="chip mono">GitHub Actions</span><span class="chip mono">Claude Code</span>
           </div>
         </article>
       </div>
@@ -154,13 +201,12 @@
         <h2 id="about-heading">About</h2>
       </div>
       <div class="grid">
-        <p class="panel" style="padding:1rem">Computer engineering student building practical systems: computer vision for sorting, event‑driven services, and UI that makes data obvious.</p>
+        <p class="panel" style="padding:1rem">Computer engineering student building practical systems at the intersection of developer tooling and AI: frameworks with rigorous, spec-first design, and workflows that let AI agents do more of the implementation without losing engineering discipline.</p>
         <div class="panel" style="padding:1rem">
-          <div class="muted" style="margin-bottom:.5rem">Recent timeline</div>
+          <div class="muted mono" style="margin-bottom:.5rem">recent_timeline</div>
           <div class="timeline">
-            <div class="item"><span class="dot"></span><div><strong>Summer ’25</strong> — Automation intern at TVH Parts Co.; pitched an ROI‑driven CV solution.</div></div>
-            <div class="item"><span class="dot"></span><div><strong>Summer ’25</strong> — Built an end-to-end live inference pipeline; from data collection to deployment.</div></div>
-            <div class="item"><span class="dot"></span><div><strong>Now</strong> — Focusing on frontend craft and personal agents.</div></div>
+            <div class="item"><span class="dot-tl"></span><div><span class="when">Summer '25</span> — Automation intern at TVH Parts Co.; pitched an ROI-driven computer-vision solution and built an end-to-end live inference pipeline, from data collection to deployment.</div></div>
+            <div class="item"><span class="dot-tl"></span><div><span class="when">Now</span> — Building TTUI (a terminal UI framework) and Model-Experiments (AI-native engineering workflows), both developed spec-first: design doc → plan → implementation.</div></div>
           </div>
         </div>
       </div>
@@ -173,7 +219,7 @@
         <h2 id="contact-heading">Contact</h2>
       </div>
       <div class="panel" style="padding:1rem">
-        <p class="muted">Want to collaborate or chat? Reach me at <a href="mailto:tatemeyer04@gmail.com" class="ghost" style="border:0; padding:0; text-decoration:underline">tatemeyer04@gmail.com</a>.</p>
+        <p class="muted">Want to collaborate or chat? Reach me at <a href="mailto:tatemeyer04@gmail.com" class="ghost" style="border:0; padding:0; text-decoration:underline">tatemeyer04@gmail.com</a> or on <a href="https://www.linkedin.com/in/tate-meyer2004/" class="ghost" style="border:0; padding:0; text-decoration:underline">LinkedIn</a>.</p>
       </div>
     </section>
   </main>
@@ -182,9 +228,8 @@
     <div class="container footer-grid">
       <div>© <span id="y"></span> Tate Meyer. Built on GitHub Pages.</div>
       <div>
-        <a class="ghost" href="#" aria-label="GitHub">GitHub</a>
-        <a class="ghost" href="#" aria-label="LinkedIn">LinkedIn</a>
-        <a class="ghost" href="#" aria-label="X/Twitter">X</a>
+        <a class="ghost" href="https://github.com/tatemeyer" aria-label="GitHub">GitHub</a>
+        <a class="ghost" href="https://www.linkedin.com/in/tate-meyer2004/" aria-label="LinkedIn">LinkedIn</a>
       </div>
     </div>
   </footer>
@@ -205,6 +250,8 @@
         document.documentElement.style.setProperty('--text', '#0b1324');
         document.documentElement.style.setProperty('--muted', '#475569');
         document.documentElement.style.setProperty('--ring', 'rgba(14,165,233,.25)');
+        document.documentElement.style.setProperty('--term-bg', '#0b1324');
+        document.documentElement.style.setProperty('--term-border', 'rgba(15,23,42,.25)');
         document.body.style.background = 'linear-gradient(180deg, #f0f9ff, #f8fafc)';
       } else {
         document.documentElement.style.setProperty('--bg', '#0b1120');
@@ -212,6 +259,8 @@
         document.documentElement.style.setProperty('--text', '#e2e8f0');
         document.documentElement.style.setProperty('--muted', '#94a3b8');
         document.documentElement.style.setProperty('--ring', 'rgba(56,189,248,.35)');
+        document.documentElement.style.setProperty('--term-bg', '#05070d');
+        document.documentElement.style.setProperty('--term-border', 'rgba(148,163,184,.18)');
         document.body.style.background = 'radial-gradient(1200px 600px at 80% -10%, rgba(34,211,238,.15), transparent), radial-gradient(900px 400px at 10% -10%, rgba(56,189,248,.15), transparent), var(--bg)';
       }
     });
