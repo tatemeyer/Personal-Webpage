@@ -89,6 +89,7 @@
     .item{display:flex; gap:1rem; align-items:flex-start}
     .item .when{color:var(--accent)}
     .dot-tl{width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg,var(--brand),var(--accent)); margin-top:.45rem; flex-shrink:0}
+    .dot-tl.future{background:none; border:1px dashed var(--accent)}
     footer{border-top:1px solid rgba(148,163,184,.12); padding:2rem 0; color:var(--muted); font-size:.95rem}
     .footer-grid{display:grid; grid-template-columns: 1fr auto; align-items:center}
 
@@ -116,7 +117,6 @@
         <a class="ghost" href="#projects">Projects</a>
         <a class="ghost" href="#about">About</a>
         <a class="ghost" href="#contact">Contact</a>
-        <button id="themeBtn" class="ghost" aria-pressed="false">Toggle theme</button>
       </nav>
     </div>
   </header>
@@ -206,7 +206,13 @@
           <div class="muted mono" style="margin-bottom:.5rem">recent_timeline</div>
           <div class="timeline">
             <div class="item"><span class="dot-tl"></span><div><span class="when">Summer '25</span> — Automation intern at TVH Parts Co.; pitched an ROI-driven computer-vision solution and built an end-to-end live inference pipeline, from data collection to deployment.</div></div>
+            <div class="item"><span class="dot-tl"></span><div><span class="when">Summer '26</span> — AI Intern at QSPEC Solutions; developed in-house software for accelerating engineering workflows, document/drawing revisions, and continued adding to my automation toolkit.</div></div>
             <div class="item"><span class="dot-tl"></span><div><span class="when">Now</span> — Building TTUI (a terminal UI framework) and Model-Experiments (AI-native engineering workflows), both developed spec-first: design doc → plan → implementation.</div></div>
+          </div>
+          <div class="muted mono" style="margin:1.2rem 0 .5rem">future</div>
+          <div class="timeline">
+            <div class="item"><span class="dot-tl future"></span><div><span class="when">Fall '26 (late August)</span> — Returning to KU for my senior year.</div></div>
+            <div class="item"><span class="dot-tl future"></span><div><span class="when">Fall '26 (mid–late September)</span> — Joining the QSPEC Solutions staff as an AI Developer, focused on continuing the work I started during my internship.</div></div>
           </div>
         </div>
       </div>
@@ -237,33 +243,6 @@
   <script>
     // Year stamp
     document.getElementById('y').textContent = new Date().getFullYear();
-
-    // Theme toggle (dark default). Adds a light theme by toggling CSS variables.
-    const btn = document.getElementById('themeBtn');
-    let light = false;
-    btn.addEventListener('click', () => {
-      light = !light;
-      btn.setAttribute('aria-pressed', String(light));
-      if(light){
-        document.documentElement.style.setProperty('--bg', '#f8fafc');
-        document.documentElement.style.setProperty('--panel', '#ffffff');
-        document.documentElement.style.setProperty('--text', '#0b1324');
-        document.documentElement.style.setProperty('--muted', '#475569');
-        document.documentElement.style.setProperty('--ring', 'rgba(14,165,233,.25)');
-        document.documentElement.style.setProperty('--term-bg', '#0b1324');
-        document.documentElement.style.setProperty('--term-border', 'rgba(15,23,42,.25)');
-        document.body.style.background = 'linear-gradient(180deg, #f0f9ff, #f8fafc)';
-      } else {
-        document.documentElement.style.setProperty('--bg', '#0b1120');
-        document.documentElement.style.setProperty('--panel', '#0f172a');
-        document.documentElement.style.setProperty('--text', '#e2e8f0');
-        document.documentElement.style.setProperty('--muted', '#94a3b8');
-        document.documentElement.style.setProperty('--ring', 'rgba(56,189,248,.35)');
-        document.documentElement.style.setProperty('--term-bg', '#05070d');
-        document.documentElement.style.setProperty('--term-border', 'rgba(148,163,184,.18)');
-        document.body.style.background = 'radial-gradient(1200px 600px at 80% -10%, rgba(34,211,238,.15), transparent), radial-gradient(900px 400px at 10% -10%, rgba(56,189,248,.15), transparent), var(--bg)';
-      }
-    });
   </script>
 </body>
 </html>
