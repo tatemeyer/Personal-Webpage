@@ -3,11 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tate Meyer • AI Systems & Dev Tooling</title>
-  <meta name="description" content="Tate Meyer — building developer tooling and AI systems. Currently: TTUI (a terminal UI framework) and Model-Experiments (AI-native engineering workflows)." />
-  <meta property="og:title" content="Tate Meyer • AI Systems & Dev Tooling" />
-  <meta property="og:description" content="Developer tooling and AI systems, built from first principles. See TTUI and Model-Experiments." />
+  <title>Tate Meyer • Tooling for Trustworthy Agent-Written Code</title>
+  <meta name="description" content="Tate Meyer — I build the tooling that makes agent-written code trustworthy: TTUI, a terminal UI framework in Rust; Parallax, blinded perceptual verification for terminal apps; and Model-Experiments, ML research driven by intent and CI." />
+  <meta property="og:title" content="Tate Meyer • Tooling for Trustworthy Agent-Written Code" />
+  <meta property="og:description" content="Specs before the code, blinded critics after it, CI as the only arbiter of done. Build it (TTUI) → verify it (Parallax) → apply it (Model-Experiments)." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://tatemeyer.github.io/Personal-Webpage/assets/og-card.png" />
+  <meta property="og:url" content="https://tatemeyer.github.io/Personal-Webpage/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://tatemeyer.github.io/Personal-Webpage/assets/og-card.png" />
   <meta name="theme-color" content="#0ea5e9" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,19 +59,6 @@
     .btn:hover{transform:translateY(-1px)}
     .panel{background:linear-gradient(180deg, rgba(15,23,42,.9), rgba(15,23,42,.6)); border:1px solid rgba(148,163,184,.16); border-radius:16px; box-shadow: 0 20px 50px -30px rgba(2,8,23,.7)}
 
-    /* Terminal hero panel */
-    .terminal{background:var(--term-bg); border:1px solid var(--term-border); border-radius:14px; overflow:hidden; box-shadow: 0 30px 60px -30px rgba(2,8,23,.8)}
-    .terminal-bar{display:flex; align-items:center; gap:.5rem; padding:.6rem .8rem; background:rgba(148,163,184,.06); border-bottom:1px solid var(--term-border)}
-    .dot{width:10px; height:10px; border-radius:50%}
-    .dot.red{background:#f87171} .dot.yellow{background:#fbbf24} .dot.green{background:#34d399}
-    .terminal-title{margin-left:.4rem; color:var(--muted); font-size:.8rem}
-    .terminal-body{padding:1.1rem 1.2rem 1.4rem; font-size:.9rem; line-height:1.7}
-    .terminal-body .line{white-space:pre-wrap}
-    .prompt{color:var(--accent)}
-    .out{color:var(--muted)}
-    .cursor{display:inline-block; width:.55em; height:1em; background:var(--accent); vertical-align:-2px; animation: blink 1s step-end infinite}
-    @keyframes blink{50%{opacity:0}}
-
     .grid{display:grid; gap:1rem}
     .projects{padding:2rem 0 3rem}
     .section-title{display:flex; align-items:center; gap:.6rem; color:#e0f2fe; margin:1rem 0}
@@ -93,12 +84,31 @@
     footer{border-top:1px solid rgba(148,163,184,.12); padding:2rem 0; color:var(--muted); font-size:.95rem}
     .footer-grid{display:grid; grid-template-columns: 1fr auto; align-items:center}
 
+    /* Real terminal capture (rendered by Plumb's visual-snapshot) */
+    .capture{background:var(--term-bg); border:1px solid var(--term-border); border-radius:14px; overflow:hidden; margin:0; box-shadow: 0 30px 60px -30px rgba(2,8,23,.8)}
+    .capture img{display:block; width:100%; height:auto; image-rendering:pixelated}
+    .capture figcaption{padding:.6rem .85rem; border-top:1px solid var(--term-border); color:var(--muted); font-size:.8rem}
+
+    /* Build it / Verify it / Apply it bands */
+    .band{display:flex; align-items:center; gap:.8rem; margin:2rem 0 .9rem}
+    .band-label{font-size:.75rem; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); white-space:nowrap}
+    .band-rule{flex:1; height:1px; background:linear-gradient(90deg, rgba(56,189,248,.4), transparent)}
+    .card.wide{grid-column: 1 / -1; min-height:0}
+    .card .kicker{color:#e0f2fe; font-weight:600}
+
+    /* How I work */
+    .principles{display:grid; grid-template-columns: repeat(2, 1fr); gap:1rem}
+    .principle{padding:1rem}
+    .principle h3{margin:.1rem 0 .4rem; font-size:1rem; color:#e0f2fe}
+    .principle p{margin:0; color:var(--muted); font-size:.92rem}
+
     /* Responsive */
     @media (max-width: 900px){
       .hero{grid-template-columns: 1fr; padding:2.5rem 0 1rem}
       .cards{grid-template-columns: 1fr;}
       .card{grid-column: 1 / -1}
       .kpis{grid-template-columns: 1fr}
+      .principles{grid-template-columns: 1fr}
     }
   </style>
 </head>
@@ -115,6 +125,7 @@
       </a>
       <nav class="menu" aria-label="Primary">
         <a class="ghost" href="#projects">Projects</a>
+        <a class="ghost" href="#how-i-work">How I work</a>
         <a class="ghost" href="#about">About</a>
         <a class="ghost" href="#contact">Contact</a>
       </nav>
@@ -126,35 +137,24 @@
     <section class="hero">
       <div>
         <span class="badge">AI Systems &amp; Dev Tooling</span>
-        <h1>Hi, I’m Tate — I build developer tooling and AI systems.</h1>
-        <p class="subtitle">Computer engineering student at KU. Right now I'm building a terminal UI framework from first principles and experimenting with GitHub itself as the harness between a human and an AI coding agent.</p>
+        <h1>Hi, I’m Tate — I build the tooling that makes agent-written code trustworthy.</h1>
+        <p class="subtitle">Computer engineering student at KU. Specs before the code, blinded critics after it, and CI as the only arbiter of done — applied across a terminal UI framework, a perceptual verification platform, and ML research.</p>
         <div class="cta">
           <a class="btn primary" href="#projects">See projects</a>
           <a class="btn" href="#contact">Get in touch</a>
         </div>
       </div>
-      <div class="terminal" role="img" aria-label="Terminal showing a whoami command and its output">
-        <div class="terminal-bar">
-          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-          <span class="terminal-title mono">tate@meyer:~</span>
-        </div>
-        <div class="terminal-body mono">
-          <div class="line"><span class="prompt">$</span> whoami</div>
-          <div class="line out">tate meyer — building dev tools &amp; AI systems</div>
-          <div class="line">&nbsp;</div>
-          <div class="line"><span class="prompt">$</span> ls ~/currently-building</div>
-          <div class="line out">ttui/               model-experiments/</div>
-          <div class="line">&nbsp;</div>
-          <div class="line"><span class="prompt">$</span> <span class="cursor"></span></div>
-        </div>
-      </div>
+      <figure class="capture">
+        <img src="assets/ttui-falcon.gif" width="1200" height="400" alt="A cockpit dashboard rendered by TTUI in a terminal: a perspective star field behind a windshield, with hyperdrive, sensor and weapon panels below that corrupt into a burst of static and then settle." />
+        <figcaption class="mono">ttui &middot; falcon-glitch-burst &mdash; a real capture, rendered by Plumb</figcaption>
+      </figure>
     </section>
 
     <!-- KPIs / Quick facts -->
     <section aria-labelledby="facts-heading" class="kpis">
       <div class="panel kpi">
         <div class="muted mono">primary_focus</div>
-        <div>AI Systems &amp; Dev Tooling</div>
+        <div>Verification &amp; tooling for AI-assisted engineering</div>
       </div>
       <div class="panel kpi">
         <div class="muted mono">based_in</div>
@@ -162,7 +162,7 @@
       </div>
       <div class="panel kpi">
         <div class="muted mono">currently</div>
-        <div>Building TTUI &amp; Model-Experiments</div>
+        <div>TTUI v1.1.0 · Parallax · Model-Experiments</div>
       </div>
     </section>
 
@@ -172,25 +172,71 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h7" stroke="#e0f2fe" stroke-width="2" stroke-linecap="round"/></svg>
         <h2 id="projects-heading">Projects</h2>
       </div>
+      <p class="muted" style="margin:0 0 .5rem">Three projects, one loop: build the thing, prove it works without asking the author, then point the loop at real research.</p>
+
+      <div class="band"><span class="band-label mono">01 — Build it</span><span class="band-rule"></span></div>
       <div class="cards">
-        <article class="panel card" aria-labelledby="p1-title">
+        <article class="panel card wide" aria-labelledby="p1-title">
           <span class="repo-name mono">github.com/tatemeyer/ttui</span>
           <h3 id="p1-title"><a href="https://github.com/tatemeyer/ttui">TTUI</a></h3>
-          <p>A terminal UI framework built from first principles: direct control over text rendering, color, pane layout, and multiplexing.</p>
-          <span class="status">In design — spec &amp; plan complete</span>
+          <p>A terminal UI framework built from first principles. A full render pipeline — state to view builder to layout to paint to diff to terminal writer — plus a constraint-based layout engine, alpha-compositing buffer layers, and a widget set spanning text, lists, tables, glitch effects, particle systems, a perspective-projection camera and data-viz. Ten example apps and a flagship showcase reel exercise it. <em>The animation above is one of them.</em></p>
+          <span class="status">v1.1.0 — released</span>
           <div class="stack">
-            <span class="chip mono">Rust</span><span class="chip mono">Spec-driven design</span>
+            <span class="chip mono">Rust</span><span class="chip mono">Zero-dependency core</span><span class="chip mono">Spec-driven design</span>
           </div>
         </article>
-        <article class="panel card" aria-labelledby="p2-title">
+      </div>
+
+      <div class="band"><span class="band-label mono">02 — Verify it</span><span class="band-rule"></span></div>
+      <div class="cards">
+        <article class="panel card wide" aria-labelledby="p2-title">
+          <span class="repo-name mono">github.com/tatemeyer/parallax</span>
+          <h3 id="p2-title"><a href="https://github.com/tatemeyer/parallax">Parallax</a></h3>
+          <p>A platform for watching and steering agent-driven work across projects. Its first component, <strong class="kicker">Plumb</strong>, captures a running terminal app under a PTY and hands the result to four <em>blinded</em> critic agents — each sees only the image and a run manifest, never the source or the diff. Their findings merge into a single GO / NO-GO / HOLD, and a HOLD blocks just like a NO-GO, naming the lens that could not report. The model that wrote the code doesn’t get to grade it.</p>
+          <span class="status">Plumb in use — running against TTUI</span>
+          <div class="stack">
+            <span class="chip mono">Rust</span><span class="chip mono">PTY capture</span><span class="chip mono">Multi-agent review</span><span class="chip mono">Claude Code plugin</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="band"><span class="band-label mono">03 — Apply it</span><span class="band-rule"></span></div>
+      <div class="cards">
+        <article class="panel card wide" aria-labelledby="p3-title">
           <span class="repo-name mono">github.com/tatemeyer/Model-Experiments</span>
-          <h3 id="p2-title"><a href="https://github.com/tatemeyer/Model-Experiments">Model-Experiments</a></h3>
-          <p>ML research experiments — physics-informed ML for electromagnetics and Joint-Embedding Predictive Architecture (JEPA) — built with Claude Code via Bitter Lesson Engineering: file intent as a GitHub Issue, let the agent implement against it, CI verifies.</p>
+          <h3 id="p3-title"><a href="https://github.com/tatemeyer/Model-Experiments">Model-Experiments</a></h3>
+          <p>ML research pointed at the loop itself: physics-informed ML for electromagnetics — a verified PINN solving the 1D perfect-electric-conductor cavity wave equation against a closed-form solution — and JEPA work on what actually prevents representation collapse at toy scale. Built with <strong class="kicker">Bitter Lesson Engineering</strong>: intent is filed as a GitHub Issue describing the desired end state and how to verify it, an agent implements against that intent, and CI decides when it’s done.</p>
           <span class="status">Active</span>
           <div class="stack">
             <span class="chip mono">Python</span><span class="chip mono">PyTorch</span><span class="chip mono">uv</span><span class="chip mono">Claude Code</span>
           </div>
         </article>
+      </div>
+    </section>
+
+    <!-- How I work -->
+    <section id="how-i-work" class="about" aria-labelledby="how-heading">
+      <div class="section-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="#e0f2fe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h2 id="how-heading">How I work</h2>
+      </div>
+      <div class="principles">
+        <div class="panel principle">
+          <h3>Spec-first</h3>
+          <p>No implementation without an approved design doc and a plan. Every feature goes brainstorm → design → plan → build, and the docs stay in the repo as the record.</p>
+        </div>
+        <div class="panel principle">
+          <h3>Blinded verification</h3>
+          <p>The author doesn’t grade the work. Critics see the artifact and nothing else — not the source, not the diff, not who wrote it.</p>
+        </div>
+        <div class="panel principle">
+          <h3>CI is truth</h3>
+          <p>“Done” is a green pipeline, not an opinion. Intent states how a change can be verified before anyone writes the code that satisfies it.</p>
+        </div>
+        <div class="panel principle">
+          <h3>Explicit autonomy</h3>
+          <p>Every unit of work declares how much human review it needs. Some changes merge themselves on green CI; others never do, and the label says which.</p>
+        </div>
       </div>
     </section>
 
@@ -201,18 +247,18 @@
         <h2 id="about-heading">About</h2>
       </div>
       <div class="grid">
-        <p class="panel" style="padding:1rem">Computer engineering student building practical systems at the intersection of developer tooling and AI: frameworks with rigorous, spec-first design, and workflows that let AI agents do more of the implementation without losing engineering discipline.</p>
+        <p class="panel" style="padding:1rem">Computer engineering student building practical systems at the intersection of developer tooling and AI. The interesting problem isn’t getting an agent to write code — it’s knowing whether the code it wrote is any good. So I build both halves: the systems themselves, and the harness that has to be convinced before they ship.</p>
         <div class="panel" style="padding:1rem">
           <div class="muted mono" style="margin-bottom:.5rem">recent_timeline</div>
           <div class="timeline">
             <div class="item"><span class="dot-tl"></span><div><span class="when">Summer '25</span> — Automation intern at TVH Parts Co.; pitched an ROI-driven computer-vision solution and built an end-to-end live inference pipeline, from data collection to deployment.</div></div>
             <div class="item"><span class="dot-tl"></span><div><span class="when">Summer '26</span> — AI Intern at QSPEC Solutions; developed in-house software for accelerating engineering workflows, document/drawing revisions, and continued adding to my automation toolkit.</div></div>
-            <div class="item"><span class="dot-tl"></span><div><span class="when">Now</span> — Building TTUI (a terminal UI framework) and Model-Experiments (AI-native engineering workflows), both developed spec-first: design doc → plan → implementation.</div></div>
+            <div class="item"><span class="dot-tl"></span><div><span class="when">Now</span> — Shipped TTUI v1.1.0, built Plumb (Parallax's perceptual verification tool) and put it to work against TTUI, and moved Model-Experiments onto an intent-and-CI loop.</div></div>
           </div>
           <div class="muted mono" style="margin:1.2rem 0 .5rem">future</div>
           <div class="timeline">
-            <div class="item"><span class="dot-tl future"></span><div><span class="when">Fall '26 (late August)</span> — Returning to KU for my senior year.</div></div>
-            <div class="item"><span class="dot-tl future"></span><div><span class="when">Fall '26 (mid–late September)</span> — Joining the QSPEC Solutions staff as an AI Developer, focused on continuing the work I started during my internship.</div></div>
+            <div class="item"><span class="dot-tl future"></span><div><span class="when">August 24, '26</span> — Back at KU for my senior year.</div></div>
+            <div class="item"><span class="dot-tl future"></span><div><span class="when">September '26</span> — Joining the QSPEC Solutions staff as an AI Developer, focused on continuing the work I started during my internship.</div></div>
           </div>
         </div>
       </div>
